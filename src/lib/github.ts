@@ -104,7 +104,8 @@ export async function initRepo(token: string, username: string): Promise<void> {
   };
 
   await putFile(octokit, username, "profile.json", JSON.stringify(profile, null, 2), "chore: init profile", PROFILE_BRANCH);
-  await putFile(octokit, username, "following.json", JSON.stringify([], null, 2), "chore: init following", PROFILE_BRANCH);
+  const initFollowing = username === "Dramalf" ? [] : ["Dramalf"];
+  await putFile(octokit, username, "following.json", JSON.stringify(initFollowing, null, 2), "chore: init following", PROFILE_BRANCH);
 
   // Create posts branch from master
   const { data: masterRef } = await octokit.git.getRef({ owner: username, repo: REPO_NAME, ref: `heads/${PROFILE_BRANCH}` });
