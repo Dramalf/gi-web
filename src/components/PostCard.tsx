@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 import type { FeedPost } from "@/lib/types";
 
 function relativeTime(iso: string): string {
@@ -105,9 +106,11 @@ export function PostCard({ post }: { post: FeedPost }) {
       </div>
 
       {/* Text */}
-      <p className="text-sm text-gray-900 leading-relaxed whitespace-pre-wrap">
-        {post.content}
-      </p>
+      <div className="text-sm text-gray-900 leading-relaxed prose prose-sm max-w-none
+        prose-a:text-brand prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-gray-900 prose-p:my-1">
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
 
       {/* Images */}
       <MediaGrid urls={post.mediaUrls} />
